@@ -1,0 +1,36 @@
+<mxfile host="65bd71144e">
+    <diagram id="workflow" name="Workflow Diagram">
+        <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Workflow Phase" style="swimlane;html=1;startSize=20;horizontal=1;container=1;collapsible=1;childLayout=flowLayout;fontStyle=1;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="80" width="640" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="1. Data Collection&#xa;(Raw CSV Files)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+                    <mxGeometry x="20" y="40" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="2. Data Analysis&#xa;(Univariate / Multivariate)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+                    <mxGeometry x="170" y="40" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="3. Preprocessing&#xa;(Encoding / Scaling)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+                    <mxGeometry x="320" y="40" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="4. Model Building&#xa;(Training / Evaluation)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+                    <mxGeometry x="470" y="40" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="5. Web App&#xa;(Flask / Templates)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+                    <mxGeometry x="170" y="140" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="6. Deployment&#xa;(Local / Watson)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+                    <mxGeometry x="320" y="140" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="2" source="3" target="4"/>
+                <mxCell id="10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="2" source="4" target="5"/>
+                <mxCell id="11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="2" source="5" target="6"/>
+                <mxCell id="12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="2" source="6" target="8"/>
+                <mxCell id="13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="2" source="8" target="7"/>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

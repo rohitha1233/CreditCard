@@ -1,0 +1,214 @@
+{% extends 'layout.html' %}
+
+{% block title %}Apex Bank | Credit Eligibility Assessment Form{% endblock %}
+
+{% block content %}
+<section class="py-4 bg-light-gray">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9 col-lg-10">
+                <div class="form-container p-4 p-md-5 rounded bg-white shadow-lg border-top-primary slide-up-animation">
+                    <!-- Heading -->
+                    <div class="text-center mb-4">
+                        <i class="fa-solid fa-credit-card fa-3x text-primary mb-3"></i>
+                        <h2 class="form-heading text-navy">Credit Eligibility Assessment</h2>
+                        <p class="text-muted">Fill out the form below to run the automated credit eligibility engine.</p>
+                    </div>
+
+                    <!-- Display Backend Validation Errors -->
+                    {% if errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <h6 class="alert-heading font-weight-bold"><i class="fa-solid fa-triangle-exclamation me-2"></i>Validation Failure:</h6>
+                            <ul class="mb-0 small">
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+
+                    <!-- Assessment Form -->
+                    <form action="{{ url_for('predict') }}" method="POST" id="creditForm" class="needs-validation" novalidate>
+                        <!-- Section 1: Personal Details -->
+                        <h5 class="form-section-title border-bottom pb-2 mb-3"><i class="fa-solid fa-user text-primary me-2"></i>Personal Details</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label for="gender" class="form-label font-weight-medium">Gender <span class="text-danger">*</span></label>
+                                <select class="form-select" id="gender" name="gender" required>
+                                    <option value="" disabled selected>Select Gender</option>
+                                    <option value="F" {% if prev_inputs and prev_inputs.get('gender') == 'F' %}selected{% endif %}>Female</option>
+                                    <option value="M" {% if prev_inputs and prev_inputs.get('gender') == 'M' %}selected{% endif %}>Male</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="age" class="form-label font-weight-medium">Age (Years) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="age" name="age" min="18" max="100" placeholder="e.g. 32" value="{{ prev_inputs.get('age', '') if prev_inputs else '' }}" required>
+                                <div class="invalid-feedback">Age must be between 18 and 100.</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="family_status" class="form-label font-weight-medium">Marital Status <span class="text-danger">*</span></label>
+                                <select class="form-select" id="family_status" name="family_status" required>
+                                    <option value="" disabled selected>Select Status</option>
+                                    <option value="Married" {% if prev_inputs and prev_inputs.get('family_status') == 'Married' %}selected{% endif %}>Married</option>
+                                    <option value="Single / not married" {% if prev_inputs and prev_inputs.get('family_status') == 'Single / not married' %}selected{% endif %}>Single / not married</option>
+                                    <option value="Civil marriage" {% if prev_inputs and prev_inputs.get('family_status') == 'Civil marriage' %}selected{% endif %}>Civil marriage</option>
+                                    <option value="Separated" {% if prev_inputs and prev_inputs.get('family_status') == 'Separated' %}selected{% endif %}>Separated</option>
+                                    <option value="Widow" {% if prev_inputs and prev_inputs.get('family_status') == 'Widow' %}selected{% endif %}>Widow</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="children" class="form-label font-weight-medium">Count of Children <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="children" name="children" min="0" max="10" placeholder="e.g. 0" value="{{ prev_inputs.get('children', '0') if prev_inputs else '0' }}" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="family_members" class="form-label font-weight-medium">Family Size <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="family_members" name="family_members" min="1" max="15" placeholder="e.g. 2" value="{{ prev_inputs.get('family_members', '1') if prev_inputs else '1' }}" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="education_type" class="form-label font-weight-medium">Education Level <span class="text-danger">*</span></label>
+                                <select class="form-select" id="education_type" name="education_type" required>
+                                    <option value="" disabled selected>Select Education</option>
+                                    <option value="Secondary / secondary special" {% if prev_inputs and prev_inputs.get('education_type') == 'Secondary / secondary special' %}selected{% endif %}>Secondary special</option>
+                                    <option value="Higher education" {% if prev_inputs and prev_inputs.get('education_type') == 'Higher education' %}selected{% endif %}>Higher education</option>
+                                    <option value="Incomplete higher" {% if prev_inputs and prev_inputs.get('education_type') == 'Incomplete higher' %}selected{% endif %}>Incomplete higher</option>
+                                    <option value="Lower secondary" {% if prev_inputs and prev_inputs.get('education_type') == 'Lower secondary' %}selected{% endif %}>Lower secondary</option>
+                                    <option value="Academic degree" {% if prev_inputs and prev_inputs.get('education_type') == 'Academic degree' %}selected{% endif %}>Academic degree</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Financial Details -->
+                        <h5 class="form-section-title border-bottom pb-2 mb-3"><i class="fa-solid fa-coins text-primary me-2"></i>Financial & Occupation Profile</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="income" class="form-label font-weight-medium">Annual Income (USD) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="income" name="income" min="5000" max="10000000" placeholder="e.g. 85000" value="{{ prev_inputs.get('income', '') if prev_inputs else '' }}" required>
+                                <div class="invalid-feedback">Annual income must be at least $5,000.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="income_type" class="form-label font-weight-medium">Income Stream Type <span class="text-danger">*</span></label>
+                                <select class="form-select" id="income_type" name="income_type" required>
+                                    <option value="" disabled selected>Select Income Type</option>
+                                    <option value="Working" {% if prev_inputs and prev_inputs.get('income_type') == 'Working' %}selected{% endif %}>Working</option>
+                                    <option value="Commercial associate" {% if prev_inputs and prev_inputs.get('income_type') == 'Commercial associate' %}selected{% endif %}>Commercial associate</option>
+                                    <option value="State servant" {% if prev_inputs and prev_inputs.get('income_type') == 'State servant' %}selected{% endif %}>State servant</option>
+                                    <option value="Pensioner" {% if prev_inputs and prev_inputs.get('income_type') == 'Pensioner' %}selected{% endif %}>Pensioner</option>
+                                    <option value="Student" {% if prev_inputs and prev_inputs.get('income_type') == 'Student' %}selected{% endif %}>Student</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="occupation_type" class="form-label font-weight-medium">Occupation Type <span class="text-danger">*</span></label>
+                                <select class="form-select" id="occupation_type" name="occupation_type" required>
+                                    <option value="" disabled selected>Select Job Role</option>
+                                    <option value="Laborers" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Laborers' %}selected{% endif %}>Laborers</option>
+                                    <option value="Core staff" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Core staff' %}selected{% endif %}>Core staff</option>
+                                    <option value="Sales staff" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Sales staff' %}selected{% endif %}>Sales staff</option>
+                                    <option value="Managers" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Managers' %}selected{% endif %}>Managers</option>
+                                    <option value="Drivers" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Drivers' %}selected{% endif %}>Drivers</option>
+                                    <option value="High skill tech staff" {% if prev_inputs and prev_inputs.get('occupation_type') == 'High skill tech staff' %}selected{% endif %}>High skill tech staff</option>
+                                    <option value="Accountants" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Accountants' %}selected{% endif %}>Accountants</option>
+                                    <option value="Medicine staff" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Medicine staff' %}selected{% endif %}>Medicine staff</option>
+                                    <option value="Security staff" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Security staff' %}selected{% endif %}>Security staff</option>
+                                    <option value="Cleaning staff" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Cleaning staff' %}selected{% endif %}>Cleaning staff</option>
+                                    <option value="Waiters/barmen staff" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Waiters/barmen staff' %}selected{% endif %}>Waiters/barmen staff</option>
+                                    <option value="IT staff" {% if prev_inputs and prev_inputs.get('occupation_type') == 'IT staff' %}selected{% endif %}>IT staff</option>
+                                    <option value="Unknown" {% if prev_inputs and prev_inputs.get('occupation_type') == 'Unknown' %}selected{% endif %}>Other / Unspecified</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employed_years" class="form-label font-weight-medium">Years of Employment <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="employed_years" name="employed_years" min="0" max="60" step="0.5" placeholder="e.g. 5" value="{{ prev_inputs.get('employed_years', '') if prev_inputs else '' }}" required>
+                                <div class="invalid-feedback">Employment years must correspond with age limits.</div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Asset Details -->
+                        <h5 class="form-section-title border-bottom pb-2 mb-3"><i class="fa-solid fa-house-laptop text-primary me-2"></i>Assets & Dwelling</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label for="housing_type" class="form-label font-weight-medium">Housing Layout <span class="text-danger">*</span></label>
+                                <select class="form-select" id="housing_type" name="housing_type" required>
+                                    <option value="" disabled selected>Select Dwelling</option>
+                                    <option value="House / apartment" {% if prev_inputs and prev_inputs.get('housing_type') == 'House / apartment' %}selected{% endif %}>House / apartment</option>
+                                    <option value="With parents" {% if prev_inputs and prev_inputs.get('housing_type') == 'With parents' %}selected{% endif %}>With parents</option>
+                                    <option value="Rented apartment" {% if prev_inputs and prev_inputs.get('housing_type') == 'Rented apartment' %}selected{% endif %}>Rented apartment</option>
+                                    <option value="Municipal apartment" {% if prev_inputs and prev_inputs.get('housing_type') == 'Municipal apartment' %}selected{% endif %}>Municipal apartment</option>
+                                    <option value="Office apartment" {% if prev_inputs and prev_inputs.get('housing_type') == 'Office apartment' %}selected{% endif %}>Office apartment</option>
+                                    <option value="Co-op apartment" {% if prev_inputs and prev_inputs.get('housing_type') == 'Co-op apartment' %}selected{% endif %}>Co-op apartment</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="own_car" class="form-label font-weight-medium">Vehicle Ownership <span class="text-danger">*</span></label>
+                                <select class="form-select" id="own_car" name="own_car" required>
+                                    <option value="N" {% if prev_inputs and prev_inputs.get('own_car') == 'N' %}selected{% endif %}>Does Not Own Car</option>
+                                    <option value="Y" {% if prev_inputs and prev_inputs.get('own_car') == 'Y' %}selected{% endif %}>Owns Personal Car</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="own_realty" class="form-label font-weight-medium">Property Ownership <span class="text-danger">*</span></label>
+                                <select class="form-select" id="own_realty" name="own_realty" required>
+                                    <option value="Y" {% if prev_inputs and prev_inputs.get('own_realty') == 'Y' %}selected{% endif %}>Owns Real Estate Property</option>
+                                    <option value="N" {% if prev_inputs and prev_inputs.get('own_realty') == 'N' %}selected{% endif %}>Does Not Own Real Estate</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Section 4: Communication -->
+                        <h5 class="form-section-title border-bottom pb-2 mb-3"><i class="fa-solid fa-address-book text-primary me-2"></i>Contact Details</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label for="work_phone" class="form-label font-weight-medium">Work Phone</label>
+                                <select class="form-select" id="work_phone" name="work_phone">
+                                    <option value="0" {% if prev_inputs and prev_inputs.get('work_phone') == '0' %}selected{% endif %}>No</option>
+                                    <option value="1" {% if prev_inputs and prev_inputs.get('work_phone') == '1' %}selected{% endif %}>Yes</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phone" class="form-label font-weight-medium">Personal Phone</label>
+                                <select class="form-select" id="phone" name="phone">
+                                    <option value="1" {% if prev_inputs and prev_inputs.get('phone') == '1' %}selected{% endif %}>Yes</option>
+                                    <option value="0" {% if prev_inputs and prev_inputs.get('phone') == '0' %}selected{% endif %}>No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email" class="form-label font-weight-medium">Email Address Listed</label>
+                                <select class="form-select" id="email" name="email">
+                                    <option value="0" {% if prev_inputs and prev_inputs.get('email') == '0' %}selected{% endif %}>No</option>
+                                    <option value="1" {% if prev_inputs and prev_inputs.get('email') == '1' %}selected{% endif %}>Yes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Form Buttons -->
+                        <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top">
+                            <button type="reset" class="btn btn-outline-secondary px-4 py-2 font-weight-medium" id="resetBtn">
+                                <i class="fa-solid fa-rotate-left me-2"></i>Reset Form
+                            </button>
+                            <button type="submit" class="btn btn-primary-gradient px-5 py-2.5 font-weight-semibold" id="submitBtn">
+                                Run Assessment <i class="fa-solid fa-paper-plane ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Processing Overlay Loader Spinner -->
+<div id="loadingOverlay" class="loading-overlay d-none">
+    <div class="text-center text-light">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h5 class="mt-3 font-weight-semibold">Apex Decision Engine</h5>
+        <p class="small text-light-muted">Running label encoding and scaling classifications...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Validation client script -->
+<script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+{% endblock %}

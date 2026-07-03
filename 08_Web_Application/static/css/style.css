@@ -1,0 +1,310 @@
+/* style.css - Apex Bank Design Stylesheet */
+
+:root {
+    --primary-color: #1E3A8A;       /* Deep Navy */
+    --secondary-color: #2563EB;     /* Royal Blue */
+    --accent-color: #3B82F6;        /* Light Blue */
+    --bg-color: #F8FAFC;            /* Warm Off-White */
+    --dark-bg: #0F172A;             /* Slate Black */
+    --card-bg: #FFFFFF;
+    --text-navy: #1E293B;           /* Dark Charcoal */
+    --text-muted: #64748B;
+    --success-color: #10B981;       /* Emerald Green */
+    --danger-color: #EF4444;        /* Crimson Red */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Navbar overrides */
+.bg-dark-blue {
+    background-color: var(--primary-color) !important;
+}
+
+.brand-logo {
+    height: 38px;
+    width: auto;
+}
+
+.brand-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+}
+
+.brand-name .accent {
+    color: #3B82F6;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #FFFFFF;
+}
+
+/* Page wrapper padding */
+.page-wrapper {
+    flex: 1 0 auto;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1D4ED8 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.accent-text {
+    color: #60A5FA;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #E2E8F0;
+    font-weight: 300;
+}
+
+.btn-primary-gradient {
+    background: linear-gradient(90deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    color: white;
+}
+
+.hero-img {
+    max-height: 400px;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.25));
+}
+
+/* Sections */
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.divider {
+    width: 60px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    margin-top: 15px;
+    margin-bottom: 25px;
+    border-radius: 2px;
+}
+
+.section-description {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.section-dark-bg {
+    background-color: #F1F5F9;
+}
+
+.bg-light-gray {
+    background-color: #F8FAFC;
+}
+
+/* Cards styles */
+.info-card {
+    border-radius: 8px;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.border-top-primary {
+    border-top: 5px solid var(--primary-color) !important;
+}
+
+.border-top-secondary {
+    border-top: 5px solid var(--secondary-color) !important;
+}
+
+.border-top-success {
+    border-top: 6px solid var(--success-color) !important;
+}
+
+.border-top-danger {
+    border-top: 6px solid var(--danger-color) !important;
+}
+
+/* Feature Hover Lift */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #E2E8F0;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(30, 41, 59, 0.1) !important;
+    border-color: var(--accent-color);
+}
+
+.model-badge {
+    background-color: #FFFFFF;
+    transition: border-color 0.3s ease;
+}
+
+.model-badge:hover {
+    border-color: var(--secondary-color) !important;
+}
+
+.bg-navy-blue {
+    background-color: var(--dark-bg) !important;
+}
+
+.text-light-muted {
+    color: #94A3B8 !important;
+}
+
+/* Form Styles */
+.form-container {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+}
+
+.form-heading {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.form-section-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    letter-spacing: 0.3px;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+.form-control, .form-select {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.85);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Result Cards */
+.bg-soft-success {
+    background-color: rgba(16, 185, 129, 0.12) !important;
+}
+
+.bg-soft-danger {
+    background-color: rgba(239, 68, 68, 0.12) !important;
+}
+
+.text-success-dark {
+    color: #065F46;
+}
+
+.text-danger-dark {
+    color: #991B1B;
+}
+
+.metric-box {
+    border: 1px solid #E2E8F0;
+}
+
+/* Footer structure */
+.bg-deep-navy {
+    background-color: #0B0F19 !important;
+}
+
+.footer-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-title::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: var(--secondary-color);
+    margin-top: 8px;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #FFFFFF !important;
+    padding-left: 5px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: var(--secondary-color);
+}

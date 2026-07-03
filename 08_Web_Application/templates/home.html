@@ -1,0 +1,179 @@
+{% extends 'layout.html' %}
+
+{% block title %}Apex Bank | Credit Approval Prediction System{% endblock %}
+
+{% block content %}
+<!-- Hero Banner Section -->
+<section class="hero-section text-light py-5 d-flex align-items-center">
+    <div class="container py-5">
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-6 slide-up-animation">
+                <h1 class="hero-title mb-3">Instant Credit <span class="accent-text">Eligibility</span> Decisions</h1>
+                <p class="hero-subtitle mb-4">Empowering modern financial analysts with predictive machine learning insights. Automate credit card applicant evaluation in seconds with state-of-the-art accuracy.</p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('predict') }}" class="btn btn-primary-gradient px-4 py-3 me-3 text-uppercase font-weight-bold">
+                        <i class="fa-solid fa-gauge-high me-2"></i>Get Started
+                    </a>
+                    <a href="#overview" class="btn btn-outline-light px-4 py-3 text-uppercase font-weight-bold">
+                        Learn More <i class="fa-solid fa-arrow-down ms-2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center slide-up-animation delay-1">
+                <img src="{{ url_for('static', filename='images/hero_banner.png') }}" alt="Banking App Illustration" class="img-fluid hero-img rounded-3" onerror="this.src='https://img.icons8.com/color-glass/480/credit-card-front.png';">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Overview & Problem Statement -->
+<section id="overview" class="py-5 section-dark-bg">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title">Project Overview</h2>
+                <div class="divider mx-auto"></div>
+                <p class="section-description">Our Credit Card Approval Prediction System resolves one of banking's oldest bottlenecks: manual application screening.</p>
+            </div>
+        </div>
+
+        <div class="row gy-4">
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="info-card p-4 rounded bg-white shadow-sm w-100 border-top-primary">
+                    <div class="card-icon-container mb-3 text-primary">
+                        <i class="fa-solid fa-triangle-exclamation fa-2x"></i>
+                    </div>
+                    <h4 class="card-title text-navy">Problem Statement</h4>
+                    <p class="card-text">Financial institutions face growing risk from delinquent accounts while processing rising volumes of applications. Manual reviews lead to delays, customer churn, and elevated credit default rates.</p>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="info-card p-4 rounded bg-white shadow-sm w-100 border-top-secondary">
+                    <div class="card-icon-container mb-3 text-success">
+                        <i class="fa-solid fa-bullseye fa-2x"></i>
+                    </div>
+                    <h4 class="card-title text-navy">Project Objective</h4>
+                    <p class="card-text">Develop and deploy a high-fidelity machine learning pipeline comparing Logistic Regression, Decision Tree, Random Forests, and XGBoost classifiers to instantly evaluate risk status and predict approvals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- System Features -->
+<section class="py-5 bg-light-gray">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title">Key Core Features</h2>
+                <div class="divider mx-auto"></div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-box text-center p-4 rounded bg-white shadow-sm hover-lift">
+                    <i class="fa-solid fa-brain fa-3x text-primary mb-3"></i>
+                    <h5>Advanced ML Engine</h5>
+                    <p>Trains on demographic traits and credit history to deliver instant decisions with optimized risk sensitivity.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-box text-center p-4 rounded bg-white shadow-sm hover-lift">
+                    <i class="fa-solid fa-shield-halved fa-3x text-success mb-3"></i>
+                    <h5>Secure Input Validation</h5>
+                    <p>Both frontend javascript and backend python script block invalid inputs, empty variables, and boundary leaks.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="feature-box text-center p-4 rounded bg-white shadow-sm hover-lift">
+                    <i class="fa-solid fa-chart-line fa-3x text-info mb-3"></i>
+                    <h5>Confidence Metrics</h5>
+                    <p>Returns predictions accompanied by confidence scores representing model prediction probability.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ML Models highlights -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title">Classifiers Comparison</h2>
+                <div class="divider mx-auto"></div>
+                <p class="section-description">We compared four robust algorithms during model training, selecting the highest accuracy classifier.</p>
+            </div>
+        </div>
+
+        <div class="row gy-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="model-badge p-4 text-center rounded border shadow-sm">
+                    <h5 class="text-navy font-weight-bold">Logistic Regression</h5>
+                    <p class="text-muted small">Baseline linear probability estimator with high speed.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="model-badge p-4 text-center rounded border shadow-sm">
+                    <h5 class="text-navy font-weight-bold">Decision Tree</h5>
+                    <p class="text-muted small">Hierarchical boundary splits providing logical explanation paths.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="model-badge p-4 text-center rounded border shadow-sm">
+                    <h5 class="text-navy font-weight-bold">Random Forest</h5>
+                    <p class="text-muted small">Bagging ensemble reducing training variance and overfits.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="model-badge p-4 text-center rounded border shadow-sm">
+                    <h5 class="text-navy font-weight-bold">XGBoost Classifier</h5>
+                    <p class="text-muted small">Optimized gradient boosting framework for tabular datasets.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Workflow Walkthrough -->
+<section class="py-5 bg-navy-blue text-light">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title text-light">System Processing Workflow</h2>
+                <div class="divider mx-auto bg-primary"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="workflow-steps position-relative">
+                    <div class="row text-center gy-4">
+                        <div class="col-md-3">
+                            <div class="workflow-step-circle mx-auto bg-primary text-light mb-3">1</div>
+                            <h6>Demographics Form</h6>
+                            <p class="small text-light-muted">Applicant details entered via web browser inputs.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="workflow-step-circle mx-auto bg-primary text-light mb-3">2</div>
+                            <h6>Encoding & Scaling</h6>
+                            <p class="small text-light-muted">Label encoders and standard scalers format inputs.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="workflow-step-circle mx-auto bg-primary text-light mb-3">3</div>
+                            <h6>ML Prediction Model</h6>
+                            <p class="small text-light-muted">Trained weights evaluate candidate credit default risk.</p>
+                        </div>
+                        <div class="col-md-4 col-lg-3">
+                            <div class="workflow-step-circle mx-auto bg-primary text-light mb-3">4</div>
+                            <h6>Risk Decision Renders</h6>
+                            <p class="small text-light-muted">Approved/Rejected cards render instantly to screen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

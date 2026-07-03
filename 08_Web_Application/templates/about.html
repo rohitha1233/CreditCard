@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% block title %}Apex Bank | About Prediction Project{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-navy-blue text-light text-center">
+    <div class="container py-3">
+        <h1 class="font-weight-bold">About the Project</h1>
+        <p class="lead text-light-muted">Credit Card Approval Prediction using Machine Learning - SmartBridge Virtual Internship</p>
+    </div>
+</section>
+
+<section class="py-5 bg-white text-dark">
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-7">
+                <h3 class="text-navy mb-3"><i class="fa-solid fa-circle-info text-primary me-2"></i>Project Context</h3>
+                <p>In modern banking, credit card issuance represents a key source of revenue and customer acquisition. However, it also introduces significant financial risk if cards are approved for high-risk profiles. Traditionally, credit analysts reviewed applicants manually—evaluating incomes, educational titles, marital statuses, and job descriptions line-by-line.</p>
+                <p>This project automates the screening process using machine learning classifiers trained on real-world demographic structures and payment histories. By evaluating credit risk, banks can dramatically reduce bad debts, optimize human resource allocation, and grant instant credit cards to deserving applicants.</p>
+
+                <h3 class="text-navy mt-5 mb-3"><i class="fa-solid fa-database text-primary me-2"></i>Dataset Details</h3>
+                <p>We leverage two primary source csv datasets:</p>
+                <ul>
+                    <li><strong>Application Records:</strong> Includes demographic and financial profiles (income, age, employment years, family size, car/property ownership).</li>
+                    <li><strong>Credit Records:</strong> Monthly tracking history of applicants' repayment behaviors (payment overlays and delinquent flags).</li>
+                </ul>
+                <p>The target status code represents binary risk categories. Applicants with chronic late payments are classified as <strong>Rejected (1)</strong>, while standard/low-risk clients are labeled as <strong>Approved (0)</strong>.</p>
+            </div>
+            
+            <div class="col-lg-5">
+                <div class="p-4 rounded border shadow-sm bg-light-gray">
+                    <h5 class="text-navy border-bottom pb-2 mb-3"><i class="fa-solid fa-gears text-primary me-2"></i>Technical Pipeline</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex">
+                            <span class="badge bg-primary me-2 align-self-start">1</span>
+                            <div><strong>Clean:</strong> Dropping duplicate records, resolving empty strings, and handling missing occupation rows.</div>
+                        </li>
+                        <li class="mb-3 d-flex">
+                            <span class="badge bg-primary me-2 align-self-start">2</span>
+                            <div><strong>Engineering:</strong> Mapping raw date markers into positive numeric indicators (Age & Employed Years).</div>
+                        </li>
+                        <li class="mb-3 d-flex">
+                            <span class="badge bg-primary me-2 align-self-start">3</span>
+                            <div><strong>Aggregation:</strong> Summarizing monthly status indicators to compute maximum credit card repayment delays.</div>
+                        </li>
+                        <li class="mb-3 d-flex">
+                            <span class="badge bg-primary me-2 align-self-start">4</span>
+                            <div><strong>Transform:</strong> Executing StandardScaler scaling and LabelEncoder classifications.</div>
+                        </li>
+                        <li class="mb-3 d-flex">
+                            <span class="badge bg-primary me-2 align-self-start">5</span>
+                            <div><strong>Predict:</strong> Feeding scaled vectors to the best model classifier for eligibility assessment.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <div class="row gy-4">
+            <div class="col-md-6">
+                <h4 class="text-navy mb-3"><i class="fa-solid fa-thumbs-up text-success me-2"></i>Core Advantages</h4>
+                <ul>
+                    <li><strong>Instant Inferences:</strong> Decision turnarounds reduced from 3 business days to milliseconds.</li>
+                    <li><strong>Risk Containment:</strong> Identifies delinquent behaviors early to protect capital assets.</li>
+                    <li><strong>Consistent Benchmarks:</strong> Eliminates human bias in customer profiles evaluations.</li>
+                    <li><strong>Scalability:</strong> Modular code structures support large application traffic.</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h4 class="text-navy mb-3"><i class="fa-solid fa-rocket text-info me-2"></i>Future Scope</h4>
+                <ul>
+                    <li><strong>Dynamic Tuning:</strong> Run automatic hyperparameter grid search optimization routines.</li>
+                    <li><strong>Alternative Data Ingestion:</strong> Connect social profile patterns and utility bill history.</li>
+                    <li><strong>IBM Cloud Migration:</strong> Deploy Flask as a microservice on Watson Machine Learning container environments.</li>
+                    <li><strong>Real-time API integrations:</strong> Allow retail e-commerce gateways to call the API directly.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

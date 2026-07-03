@@ -1,0 +1,16 @@
+graph TD
+    Start([Start]) --> Collect[Collect Dataset]
+    Collect --> Imports[Import Libraries]
+    Imports --> Read[Read Dataset]
+    Read --> EDA[Exploratory Data Analysis]
+    EDA --> Cleaning[Data Cleaning & Null Handling]
+    Cleaning --> Engineering[Feature Engineering]
+    Engineering --> Encoding[Categorical Encoding & Scaling]
+    Encoding --> Training[Model Training & Cross-Validation]
+    Training --> Comparison[Model Comparison & Selection]
+    Comparison --> Save[Save Best Model & Pipelines]
+    Save --> Flask[Run Flask Web Application]
+    Flask --> FormInput[Enter Applicant Details]
+    FormInput --> Prediction[Prediction Engine Execution]
+    Prediction --> Display[Display Results on Dashboard]
+    Display --> End([End])

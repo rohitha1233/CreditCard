@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block title %}Apex Bank | Assessment Result{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light-gray">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Result Card -->
+                <div class="result-card p-4 p-md-5 rounded bg-white shadow-lg text-center slide-up-animation {% if result.status == 0 %}border-top-success{% else %}border-top-danger{% endif %}">
+                    
+                    {% if result.status == 0 %}
+                        <!-- Approved Layout -->
+                        <div class="result-icon-container text-success mb-4">
+                            <i class="fa-solid fa-circle-check fa-5x animate-bounce"></i>
+                        </div>
+                        <h2 class="result-title text-navy font-weight-bold">Application Approved</h2>
+                        <div class="alert alert-success my-4 p-3 border-0 rounded bg-soft-success">
+                            <h5 class="mb-0 text-success">Eligibility Confirmed</h5>
+                            <p class="small mb-0 text-success-dark mt-1">Based on the predictive assessment model, the applicant is flagged as a <strong>Low-Risk candidate</strong>.</p>
+                        </div>
+                    {% else %}
+                        <!-- Rejected Layout -->
+                        <div class="result-icon-container text-danger mb-4">
+                            <i class="fa-solid fa-circle-xmark fa-5x animate-bounce"></i>
+                        </div>
+                        <h2 class="result-title text-navy font-weight-bold">Application Rejected</h2>
+                        <div class="alert alert-danger my-4 p-3 border-0 rounded bg-soft-danger">
+                            <h5 class="mb-0 text-danger">Credit Risk Warning</h5>
+                            <p class="small mb-0 text-danger-dark mt-1">Based on the predictive assessment model, the applicant is flagged as a <strong>High-Risk candidate</strong>.</p>
+                        </div>
+                    {% endif %}
+
+                    <!-- Score Card Grid -->
+                    <div class="row g-3 justify-content-center my-4">
+                        <div class="col-md-5">
+                            <div class="metric-box p-3 rounded border bg-light-gray text-center">
+                                <span class="small text-muted d-block uppercase font-weight-medium">Model Decision</span>
+                                <h4 class="mb-0 text-navy mt-1 font-weight-bold">{{ result.decision }}</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="metric-box p-3 rounded border bg-light-gray text-center">
+                                <span class="small text-muted d-block uppercase font-weight-medium">Assessment Probability</span>
+                                <h4 class="mb-0 text-navy mt-1 font-weight-bold">{{ result.confidence }}%</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Applicant Summary -->
+                    <h5 class="text-navy text-start border-bottom pb-2 mt-5 mb-3"><i class="fa-solid fa-list-check me-2 text-primary"></i>Applicant Summary</h5>
+                    <div class="row text-start g-3 mb-5">
+                        <div class="col-sm-6">
+                            <span class="text-muted d-block small">Annual Income:</span>
+                            <span class="font-weight-medium text-dark">${{ "{:,.2f}".format(applicant.AMT_INCOME_TOTAL) }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="text-muted d-block small">Age:</span>
+                            <span class="font-weight-medium text-dark">{{ "{:.1f}".format(applicant.Age_Years) }} Years</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="text-muted d-block small">Income Stream / Occupation:</span>
+                            <span class="font-weight-medium text-dark">{{ applicant.NAME_INCOME_TYPE }} / {{ applicant.OCCUPATION_TYPE }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="text-muted d-block small">Years of Employment:</span>
+                            <span class="font-weight-medium text-dark">{{ applicant.Employed_Years }} Years</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="text-muted d-block small">Education Level:</span>
+                            <span class="font-weight-medium text-dark">{{ applicant.NAME_EDUCATION_TYPE }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="text-muted d-block small">Family Size (Children):</span>
+                            <span class="font-weight-medium text-dark">{{ applicant.CNT_FAM_MEMBERS | int }} Members ({{ applicant.CNT_CHILDREN }} Children)</span>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Action Buttons -->
+                    <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3">
+                        <a href="{{ url_for('predict') }}" class="btn btn-primary-gradient px-4 py-2.5 font-weight-medium w-100-mobile">
+                            <i class="fa-solid fa-rotate-left me-2"></i>New Assessment
+                        </a>
+                        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary px-4 py-2.5 font-weight-medium w-100-mobile">
+                            <i class="fa-solid fa-house me-2"></i>Return Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

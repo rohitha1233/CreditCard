@@ -1,0 +1,8 @@
+graph LR
+    User[User] <-->|Interacts| Browser[Web Browser - HTML5/CSS3/JS]
+    Browser <-->|HTTP GET / POST| FlaskFE[Flask Frontend Templates]
+    FlaskFE <-->|Routes Handler| FlaskBE[Flask Backend - app.py]
+    FlaskBE <-->|Inference Pipeline| PredEngine[Prediction Engine - utils.py]
+    PredEngine <-->|Loads Weights| SavedArtifacts[(Model Artifacts: best_model.pkl, scaler.pkl, encoder.pkl)]
+    PredEngine -->|Returns Prediction & Score| FlaskBE
+    FlaskBE -->|Renders Context Data| Browser
