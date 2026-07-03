@@ -47,21 +47,36 @@ def predict_approval(data):
         'AMT_INCOME_TOTAL', 'NAME_INCOME_TYPE', 'NAME_EDUCATION_TYPE',
         'NAME_FAMILY_STATUS', 'NAME_HOUSING_TYPE', 'FLAG_WORK_PHONE',
         'FLAG_PHONE', 'FLAG_EMAIL', 'OCCUPATION_TYPE', 'CNT_FAM_MEMBERS',
-        'Age_Years', 'Employed_Years'
+        'Age_Years', 'Employed_Years', 'Family_Dependency', 'Income_Category'
     ]
     
     # Standardize/format raw input values
     processed_row = {}
     for col in feature_order:
-        val = data.get(col)
-        # Default numeric fallback
-        if col in ['CNT_CHILDREN', 'FLAG_WORK_PHONE', 'FLAG_PHONE', 'FLAG_EMAIL']:
-            processed_row[col] = int(val) if val is not None else 0
-        elif col in ['AMT_INCOME_TOTAL', 'CNT_FAM_MEMBERS', 'Age_Years', 'Employed_Years']:
-            processed_row[col] = float(val) if val is not None else 0.0
+        if col == 'Family_Dependency':
+            children = float(data.get('CNT_CHILDREN', 0))
+            family_members = float(data.get('CNT_FAM_MEMBERS', 1.0))
+            processed_row['Family_Dependency'] = children / (family_members + 1e-5)
+        elif col == 'Income_Category':
+            income = float(data.get('AMT_INCOME_TOTAL', 0.0))
+            if income <= 135197.525:
+                processed_row['Income_Category'] = 'Low'
+            elif income <= 155949.87:
+                processed_row['Income_Category'] = 'Medium'
+            elif income <= 182413.8225:
+                processed_row['Income_Category'] = 'High'
+            else:
+                processed_row['Income_Category'] = 'Very High'
         else:
-            # Categorical string
-            processed_row[col] = str(val) if val is not None else 'Unknown'
+            val = data.get(col)
+            # Default numeric fallback
+            if col in ['CNT_CHILDREN', 'FLAG_WORK_PHONE', 'FLAG_PHONE', 'FLAG_EMAIL']:
+                processed_row[col] = int(val) if val is not None else 0
+            elif col in ['AMT_INCOME_TOTAL', 'CNT_FAM_MEMBERS', 'Age_Years', 'Employed_Years']:
+                processed_row[col] = float(val) if val is not None else 0.0
+            else:
+                # Categorical string
+                processed_row[col] = str(val) if val is not None else 'Unknown'
             
     # Apply Label Encoding
     for col, le in _ENCODER_DICT.items():
@@ -78,13 +93,14 @@ def predict_approval(data):
     
     # Scale using pre-fitted StandardScaler
     scaled_features = _SCALER.transform(row_df)
+    scaled_features_df = pd.DataFrame(scaled_features, columns=feature_order)
     
     # Run model prediction
-    prediction = int(_MODEL.predict(scaled_features)[0])
+    prediction = int(_MODEL.predict(scaled_features_df)[0])
     
     # Calculate confidence/probability if supported by model
     if hasattr(_MODEL, "predict_proba"):
-        probabilities = _MODEL.predict_proba(scaled_features)[0]
+        probabilities = _MODEL.predict_proba(scaled_features_df)[0]
         confidence = float(probabilities[prediction])
     else:
         confidence = 1.0

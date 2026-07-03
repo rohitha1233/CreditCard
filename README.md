@@ -42,32 +42,29 @@ CreditCardApprovalPrediction/
 ├── environment.yml
 ├── .gitignore
 ├── README.md
-├── 01_Project_Setup/               # Hardware and software pre-requisites
-├── 02_Project_Architecture/        # Architectural diagrams and drawio files
-├── 03_Dataset/                     # Raw CSV files
-├── 04_Data_Collection/             # Ingestion notebook
-├── 05_Data_Analysis/               # EDA notebook
-├── 06_Data_Preprocessing/          # Cleaning, target mapping, encoding, and scaling
-├── 07_Model_Building/              # Training, model comparisons, and weights
-├── 08_Web_Application/             # Flask backend & frontend files
-├── 09_Deployment/                  # Local and IBM Watson deployment guides
-├── 10_Documentation/               # Project reports and workflow details
-├── 11_Outputs/                     # Exported charts and graphs
-├── 12_Screenshots/                 # Interface screenshots
-└── assets/                         # Graphic and design mockups
+├── 01_ER_Diagram/                 # Entity Relationship, Technical Architecture & Use Case
+├── 02_Project_Workflow/            # Development Workflow and Project Execution Flow
+├── 03_Dataset/                     # Raw CSV data files
+├── 04_Prerequisites/               # Software environment prerequisites (requirements.txt)
+├── 05_Data_Analysis/               # Jupyter Notebook for EDA and descriptive graphs
+├── 06_Data_Preprocessing/          # Preprocessing pipeline, target mapping, and scalers
+├── 07_Model_Building/              # Training notebooks, comparison results, and best_model.pkl
+├── 08_Web_Application/             # Flask application source files, templates, and static assets
+├── 09_Deployment/                  # Local/cloud deployment screenshots
+└── 10_Project_Documentation/       # Technical architecture reports and execution guides
 ```
 
 ---
 
 ## 4. System Architecture
 
-The technical design includes five architectural diagrams located in the [Project Architecture Module](file:///c:/Users/laksh/CreditCard/02_Project_Architecture/README.md):
+The technical design includes architectural diagrams located in the diagram directories:
 
-1. **Entity Relationship Diagram (ERD):** Maps the relationships between applicant tables, credit balance logs, prediction requests, and model parameters.
-2. **Project Flow Diagram:** Outlines the linear execution flow from data collection through model evaluation and web display.
-3. **Technical Architecture:** Visualizes the client-server interaction patterns and model integrations.
-4. **Use Case Diagram:** Models actor-system actions for applicants and systems.
-5. **Workflow Diagram:** Illustrates the project development phases.
+1. **Entity Relationship Diagram (ERD):** Maps applicant demographics, credit balance history logs, and targets. Located in [01_ER_Diagram](01_ER_Diagram/).
+2. **Project Flow Diagram:** Outlines the logical linear flow from ingestion to result presentation. Located in [02_Project_Workflow](02_Project_Workflow/).
+3. **Technical Architecture:** Visualizes Flask server and model scoring client-server flow. Located in [01_ER_Diagram](01_ER_Diagram/).
+4. **Use Case Diagram:** Models user actions on the assessment web form. Located in [01_ER_Diagram](01_ER_Diagram/).
+5. **Workflow Diagram:** Displays development milestones and project phases. Located in [02_Project_Workflow](02_Project_Workflow/).
 
 ---
 
@@ -77,9 +74,9 @@ We evaluate three classifiers on an 80/20 train-test stratified split:
 
 | Algorithm | Test Accuracy | Precision | Recall | F1 Score | AUC |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Logistic Regression** | **82.30%** | **82.30%** | **100.00%** | **0.9029** | **0.5688** |
-| **Random Forest** | 82.30% | 82.30% | 100.00% | 0.9029 | 0.5127 |
-| **Decision Tree** | 81.50% | 82.22% | 98.91% | 0.8980 | 0.5207 |
+| **Logistic Regression** | **82.30%** | **82.30%** | **100.00%** | **0.9029** | **0.5585** |
+| **Random Forest** | 82.30% | 82.30% | 100.00% | 0.9029 | 0.5165 |
+| **Decision Tree** | 81.60% | 82.24% | 99.03% | 0.8986 | 0.5208 |
 
 We selected **Logistic Regression** as the best model for web application integration and deployment due to its high test accuracy, optimal trade-off of recall/precision on delinquent cases, and significantly lower training and inference times compared to the Random Forest model.
 
@@ -114,8 +111,8 @@ We selected **Logistic Regression** as the best model for web application integr
 
 ## 7. Deployment
 
-- **Local Deployment:** Covered in [Local Deployment Guide](file:///c:/Users/laksh/CreditCard/09_Deployment/Local_Deployment.md).
-- **IBM Watson Cloud Deployment:** Covered in [IBM Watson Deployment Guide](file:///c:/Users/laksh/CreditCard/09_Deployment/IBM_Watson_Deployment.md).
+- **Local Deployment:** Covered in [Local Deployment Guide](10_Project_Documentation/Local_Deployment.md).
+- **IBM Watson Cloud Deployment:** Covered in [IBM Watson Deployment Guide](10_Project_Documentation/IBM_Watson_Deployment.md).
 
 ---
 
