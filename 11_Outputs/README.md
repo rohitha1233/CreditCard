@@ -24,3 +24,9 @@ This directory contains the high-resolution, professional charts and plots gener
 - **[roc_curve.png](file:///c:/Users/laksh/CreditCard/11_Outputs/roc_curve.png):** Displays comparative Receiver Operating Characteristic (ROC) curves for all models, showing the trade-off between True Positive Rate and False Positive Rate.
 - **[confusion_matrix.png](file:///c:/Users/laksh/CreditCard/11_Outputs/confusion_matrix.png):** Shows true/false positive and negative predictions for the best-performing model.
 - **[feature_importance.png](file:///c:/Users/laksh/CreditCard/11_Outputs/feature_importance.png):** Displays the relative importance of features for the best model (where applicable).
+
+### 4. Web Application Frontend Screens
+
+- **[home_page.png](file:///c:/Users/laksh/CreditCard/11_Outputs/home_page.png):** Displays the landing home page of the Apex Bank Credit Portal.
+- **[prediction_page.png](file:///c:/Users/laksh/CreditCard/11_Outputs/prediction_page.png):** Displays the credit eligibility form with validation triggers.
+- **[result_page.png](file:///c:/Users/laksh/CreditCard/11_Outputs/result_page.png):** Renders the approved or rejected card output with decision indicators.
