@@ -73,16 +73,15 @@ The technical design includes five architectural diagrams located in the [Projec
 
 ## 5. Machine Learning Models & Evaluation
 
-We evaluate four classifiers on a 20% test set:
+We evaluate three classifiers on an 80/20 train-test stratified split:
 
 | Algorithm | Test Accuracy | Precision | Recall | F1 Score | AUC |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **XGBoost Classifier** | **86.60%** | **39.17%** | **43.52%** | **0.4123** | **0.8214** |
-| **Random Forest** | 83.60% | 36.54% | 70.37% | 0.4810 | 0.8460 |
-| **Logistic Regression** | 73.10% | 25.83% | 79.63% | 0.3900 | 0.8419 |
-| **Decision Tree** | 71.10% | 23.62% | 75.00% | 0.3592 | 0.7924 |
+| **Logistic Regression** | **82.30%** | **82.30%** | **100.00%** | **0.9029** | **0.5688** |
+| **Random Forest** | 82.30% | 82.30% | 100.00% | 0.9029 | 0.5127 |
+| **Decision Tree** | 81.50% | 82.22% | 98.91% | 0.8980 | 0.5207 |
 
-We chose XGBoost Classifier as the best model due to its high accuracy (86.60%) and strong generalization capabilities on unbalanced datasets.
+We selected **Logistic Regression** as the best model for web application integration and deployment due to its high test accuracy, optimal trade-off of recall/precision on delinquent cases, and significantly lower training and inference times compared to the Random Forest model.
 
 ---
 

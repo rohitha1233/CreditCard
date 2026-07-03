@@ -7,7 +7,7 @@ The Web Application Module represents the final user-facing layer (Epic 5) of th
 To deploy the trained machine learning pipeline into a responsive browser interface.
 
 ## Objectives
-- Load the pre-trained classification models (`best_model.pkl`), StandardScaler scale parameters (`scaler.pkl`), and categorical LabelEncoders (`encoder.pkl`) at startup.
+- Load the pre-trained classification model (`model/model.pkl`), StandardScaler scale parameters (`model/scaler.pkl`), and categorical LabelEncoders (`model/encoder.pkl`) at startup.
 - Implement Flask controller routes and session states.
 - Run frontend validations and display prediction scores.
 
