@@ -1,0 +1,4 @@
+Algorithm,Accuracy,Precision,Recall,F1 Score,ROC AUC,Training Time (s),Prediction Time (s)
+Logistic Regression,82.30%,82.30%,100.00%,0.9029,0.5585,0.00754,0.00101
+Decision Tree,81.60%,82.24%,99.03%,0.8986,0.5208,0.01532,0.00000
+Random Forest,82.30%,82.30%,100.00%,0.9029,0.5165,0.61755,0.02038
